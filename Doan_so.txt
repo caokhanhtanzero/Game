@@ -1,0 +1,85 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+#include <cmath>
+using namespace std;
+
+int generateRandomNumber() { // Ham tao ra so ngau nhien
+	srand(time(NULL));
+	return rand() % 1000 + 1;
+}
+int count = 0;
+int getPlayerGuess() { // Ham nhan so nguoi choi nhap
+	int number;
+    cin >> number;
+    return number;
+}
+
+void printAnswer(int number, int randomNumber) { // Ham in ra cau tra loi cua may
+	
+    if (number - randomNumber >= 100) {
+	    cout << "qua lon ... hay doan so do?" << endl;
+    } else if (number - randomNumber > 35) {
+	    cout << "hoi lon ... hay doan so do?" << endl;
+    } else if (randomNumber - number >= 100) {
+	    cout << "qua nho ... hay doan so do?" << endl;
+    } else if (randomNumber - number > 35) {
+	    cout << "hoi nho ... hay doan so do?" << endl;
+    } else if ((abs(number - randomNumber) <= 5) && ((number - randomNumber) != 0)) {
+	    cout << "gan lam roi do ... hay doan so do?" << endl;
+    } else if ((abs(number - randomNumber) <= 10) && ((number - randomNumber) != 0)) {
+	    cout << "rat gan roi do ... hay doan so do?" << endl;
+    } else if ((abs(number - randomNumber) <= 35) && ((number - randomNumber) != 0)) {
+	    cout << "gan roi do ... hay doan so do?" << endl;
+    } else {
+	    if (count == 1) {
+	        cout << "tuyet voi, ban doan ra ngay so do" << endl;
+        } else if (count <= 5) {
+	        cout << "Dung roi !!!  " << randomNumber << endl;
+	        cout << "moi doan " << count << " lan da ra, nhanh qua" << endl;
+        } else if (count > 15) {
+	        cout << count << " lan roi. Ban doan lau qua. Thua roi, choi lai van moi nao" << endl;
+        } else {
+	        cout << "Dung roi !!!  " << randomNumber << endl;
+            cout << "Doan " << count << " lan moi ra =))" << endl;
+        }
+    }
+}
+
+void playAgain() { // Ham choi lai
+	int randomNumber = generateRandomNumber();
+    int number;
+    char s;
+    cout << "Hay doan so do?" << endl;
+        do {
+            number = getPlayerGuess(); 
+            count++;
+            printAnswer(number, randomNumber);
+        } while (number != randomNumber);
+    cout << "muon choi tiep khong (c hoac k)?   ";
+    cin >> s;
+    if (s == 'c') {
+	    count = 0;
+	    playAgain();
+    }
+}
+
+int main() {
+	int randomNumber = generateRandomNumber();
+    int number;
+    char s;
+    cout << "Toi vua nghi ra mot so trong khoang tu 1 den 1000" << endl; 
+    cout << "Hay doan so do?" << endl;
+        do {
+            number = getPlayerGuess(); 
+            count ++;
+            printAnswer(number, randomNumber);
+        } while (number != randomNumber);
+    cout << "muon choi tiep khong (c hoac k)?   ";
+    cin >> s;
+    if (s == 'c') {
+	    count = 0;
+	    playAgain();
+    }
+}
