@@ -1,0 +1,138 @@
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include <iomanip>
+
+using namespace std;
+void nguoivsmay();
+void mayvsnguoi();
+void game();
+void playAgain();
+void win();
+void lose();
+
+int main() {   
+   system("cls");
+   game();   
+}
+
+void nguoivsmay() {
+    srand((unsigned)time(NULL));
+    int may = rand()%100;
+    bool dung = false;
+    int nguoichoi;
+    cout << "Ban co 7 lan doan!!!  CO LEN \n";
+    for (int i = 1; i <= 7; i++) {
+        cout << "-------------Lan doan thu " << i << "/7------------------------\n";
+        cout << "Nhap so ban doan nao : ";
+        cin >> nguoichoi;
+        if (may > nguoichoi) cout << "KO DUNG !!! .... So ban chon NHO QUA\n";
+        if (may < nguoichoi) cout << "KO DUNG !!! .... So ban chon LON QUA\n";
+        if (may == nguoichoi) {
+            dung = true;
+            win();
+            break;
+        }
+        cout << "-------------------------------------\n";
+    }
+    if (dung == false)
+        lose();
+    playAgain();
+}
+
+void mayvsnguoi() {
+    bool dung = false;
+    srand((unsigned)time(NULL));
+    int nguoichoi, solan, may;
+    cout << "Nhap so ban muon may doan ";
+    cin >> nguoichoi;
+    cout << "Nhap so lan gioi han : ";
+    cin >> solan;
+    for (int i = 1; i <= solan; i++) {
+        may = rand() % 100;
+        cout << "Lan doan thu " << setw(3) <<  i << " : May doan so " << may << endl;
+        if (may == nguoichoi) {
+            dung = true;
+            lose();
+            break;
+        }
+    }
+    if (dung == false) 
+	    win();
+    playAgain();
+}
+
+void game() {
+    system("cls");
+    int chon;
+    cout << "-------------------- Zeros Proxy ---------------------\n";
+    cout << "******************************************************\n";
+    cout << "*****************  TRO CHOI DOAN SO  *****************\n";
+    cout << "******************************************************\n";
+    cout << endl;
+    cout << "Vui long chon tro choi  ^^ \n";
+    cout << "1.  Nguoi vs may ! \n";
+    cout << "2.  May vs nguoi ! \n";
+    cout << "3.  Thoat \n";
+    do {
+    cin >> chon;
+    if ((chon < 1) || (chon > 3))
+        game();
+    }
+    while ((chon != 1) && (chon != 2) && (chon != 3));
+    system("cls");
+    if (chon == 1) nguoivsmay();
+    if (chon == 2) mayvsnguoi();
+}
+
+void win() {
+    cout << endl;
+    cout << endl;
+    cout << "     ****      ****     ****     ***    ***  \n";
+    cout << "      ***      ***    ********   ***    ***  \n";
+    cout << "       ***    ***    ***    ***  ***    ***  \n";
+    cout << "        ********     ***    ***  ***    ***  \n";
+    cout << "         ******      ***    ***  ***    ***  \n";
+    cout << "          ****       ***    ***  ***    ***  \n";
+    cout << "          ****        ********   **********  \n";
+    cout << "          ****          ****      ********   \n";
+    cout << endl;
+    cout << "  ***        ***        ***    ***    *****      ***  \n";
+    cout << "  ***        ***        ***    ***    ******     ***  \n";
+    cout << "  ***        ***        ***    ***    *** ***    ***  \n";
+    cout << "   ***      *****      ***     ***    ***  ***   ***  \n";
+    cout << "    ***    *** ***    ***      ***    ***   ***  ***  \n";
+    cout << "     ***  ***   ***  ***       ***    ***    *** ***  \n";
+    cout << "      ******     ******        ***    ***     ******  \n";
+    cout << "       ****       ****         ***    ***      *****  \n";
+}
+
+void lose() {
+    cout << endl;
+    cout << endl;
+    cout << "     ****      ****     ****     ***    ***  \n";
+    cout << "      ***      ***    ********   ***    ***  \n";
+    cout << "       ***    ***    ***    ***  ***    ***  \n";
+    cout << "        ********     ***    ***  ***    ***  \n";
+    cout << "         ******      ***    ***  ***    ***  \n";
+    cout << "          ****       ***    ***  ***    ***  \n";
+    cout << "          ****        ********   **********  \n";
+    cout << "          ****          ****      ********   \n";
+    cout << endl;
+    cout << "  ***            ****        *********     *********  \n";
+    cout << "  ***          ********      *********     *********  \n";
+    cout << "  ***         ***    ***     ***           ***        \n";
+    cout << "  ***         ***    ***     *********     *********  \n";
+    cout << "  ***         ***    ***     *********     *********  \n";
+    cout << "  ***         ***    ***           ***     ***        \n";
+    cout << "  *********    ********      *********     *********  \n";
+    cout << "  *********      ****        *********     *********  \n";
+}
+
+void playAgain() {
+    char again;
+    cout << "Ban co muon choi tiep ko ?? (C/K) ";
+    cin >> again;
+    if ((again == 'C') || (again == 'c')) 
+	    main();
+}
